@@ -1,7 +1,9 @@
 const Estudiantes = require('./src/estudiantes');
+const bodyParser = require('body-parser')
 
 const express = require('express');
 const app = express();
+app.use(bodyParser.json());
 const st = new Estudiantes();
 
 /**
@@ -25,14 +27,16 @@ app.get('/estudiantes/:id', (req, resp) => {
  */
 
 app.post('/estudiantes', (req, resp) => {
-    resp.send('This function is not working yet, sorry')
+    let ans = st.createStudent(req.body)
+    resp.send(ans)
 });
 
 /**
  * Edits one student
  */
-app.put('/estudiantes/:id', (req, resp) => {
-    resp.send(`This function is not working yet, sorry: ${req.params.id}`)
+app.put('/estudiantes', (req, resp) => {
+    let ans = st.editStudent(req.body)
+    resp.send(ans)
 });
 /**
  * Deletes one student
